@@ -2,8 +2,8 @@ import Business from "../Business/Business";
 import styles from './BusinessList.module.css'
 
 
-function BusinessList() {
-    return (
+function BusinessList(props) {
+    /*return (
         <div className={styles.BusinessList}>
             <Business />
             <Business />
@@ -13,7 +13,13 @@ function BusinessList() {
             <Business />
             <Business />
         </div>
-    );
+    );*/
+    return (
+        <div className={styles.BusinessList}>{props.businessArray.map((business) => (
+        <Business business={business} />
+    ))}</div>
+        
+);
 }
 
 export default BusinessList; 
