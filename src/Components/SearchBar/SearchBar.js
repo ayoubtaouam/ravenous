@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styles from './SearchBar.module.css';
 
 const sortByOptions = {
@@ -7,10 +8,30 @@ const sortByOptions = {
 };
 
 function SearchBar() {
+  const [term, setTerm] = useState('');
+  const [location, setLocation] = useState('');
+  const [sort, setSort] = useState('');
+
+  const clickHandler = (event) => {
+    setSort(event.target.dataset.value);
+  }
+
+  const changeHandler = ({target}) => {
+    setSort(target.value);
+  }
+
     const renderSortByOptions = () => {
         return Object.keys(sortByOptions).map((sortByOption) => {
             let sortByOptionValue = sortByOptions[sortByOption];
-            return <li key={sortByOptionValue}>{sortByOption}</li>
+            let isActive = sort === sortByOptionValue;
+            return <li 
+                      onClick={clickHandler} 
+                      key={sortByOptionValue} 
+                      data-value={sortByOptionValue}
+                      className={isActive ? styles.active : ""}
+                      >
+                        {sortByOption}
+                    </li>
         });
     };
 
@@ -20,7 +41,7 @@ function SearchBar() {
           <ul>{renderSortByOptions()}</ul>
         </div>
         <div className={styles.SearchBarFields}>
-          <input placeholder="Search Businesses" />
+          <input placeholder="Search Businesses" onChange={changeHandler} />
           <input placeholder="Where?" />
         </div>
         <div className={styles.SearchBarSubmit}>
