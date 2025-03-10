@@ -16,8 +16,15 @@ function SearchBar() {
     setSort(event.target.dataset.value);
   }
 
-  const changeHandler = ({target}) => {
-    setSort(target.value);
+  const changeTermHandler = ({target}) => {
+    setTerm(target.value);
+  }
+  const changeLocationHandler = ({target}) => {
+    setLocation(target.value);
+  }
+
+  const clickSearchHandler = () => {
+    console.log("Searching Yelp with Pizza, Brooklyn, best_match");
   }
 
     const renderSortByOptions = () => {
@@ -41,11 +48,11 @@ function SearchBar() {
           <ul>{renderSortByOptions()}</ul>
         </div>
         <div className={styles.SearchBarFields}>
-          <input placeholder="Search Businesses" onChange={changeHandler} />
-          <input placeholder="Where?" />
+          <input placeholder="Search Businesses" onChange={changeTermHandler} />
+          <input placeholder="Where?" onChange={changeLocationHandler} />
         </div>
         <div className={styles.SearchBarSubmit}>
-          <a>Let's Go</a>
+          <a onClick={clickSearchHandler}>Let's Go</a>
         </div>
       </div>
     );
