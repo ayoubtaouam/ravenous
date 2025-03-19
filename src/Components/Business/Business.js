@@ -5,19 +5,19 @@ function Business(props) {
     return (
         <div className={styles.Business}>
         <div className={styles.imageContainer}>
-          <img src={business.image} alt="" />
+          <img src={business.image_url} alt="" />
         </div>
-        <h2>{business.name}</h2>
+        <h2><a href={business.url}>{business.name}</a></h2>
         <div className={styles.BusinessInformation}>
           <div className={styles.BusinessAddress}>
-            <p>{business.address}</p>
-            <p>{business.city}</p>
-            <p>{`${business.state} ${business.zipCode}`}</p>
+            <p>{business.location['address1']}</p>
+            <p>{business.location.city}</p>
+            <p>{`${business.location.state} ${business.location['zip_code']}`}</p>
           </div>
           <div className={styles.BusinessReviews}>
-            <h3>{business.category.toUpperCase()}</h3>
+            <h3>{business.categories[0].title.toUpperCase()}</h3>
             <h3 className={styles.rating}>{`${business.rating} stars`}</h3>
-            <p>{`${business.reviewCount} reviews`}</p>
+            <p>{`${business.review_count} reviews`}</p>
           </div>
         </div>
       </div>

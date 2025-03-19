@@ -3,23 +3,12 @@ import styles from './BusinessList.module.css'
 
 
 function BusinessList(props) {
-    /*return (
-        <div className={styles.BusinessList}>
-            <Business />
-            <Business />
-            <Business />
-            <Business />
-            <Business />
-            <Business />
-            <Business />
-        </div>
-    );*/
     return (
-        <div className={styles.BusinessList}>{props.businessArray.map((business) => (
-        <Business business={business} />
-    ))}</div>
-        
-);
+        <div className={styles.BusinessList}>{props.businesses.map(
+            (business, key) => ( <Business key={key} business={business} />)
+            )}
+        </div>
+    );
 }
 
 export default BusinessList; 

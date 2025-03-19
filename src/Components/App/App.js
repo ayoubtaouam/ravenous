@@ -1,8 +1,9 @@
 import './App.css';
 import BusinessList from '../BusinessList/BusinessList';
 import SearchBar from '../SearchBar/SearchBar';
+import { useState } from 'react';
 
-const businesses = [
+/*const businesses = [
   {
     image: 'https://content.codecademy.com/programs/react/ravenous/pizza.jpg',
     name: 'MarginOtto Pizzeria',
@@ -80,11 +81,12 @@ const businesses = [
     rating: 4.5,
     reviewCount: 90
   }
-];
+];*/
 
 function App() {
+  const [businesses, setBusinesses] = useState([])
   return (
-    <><SearchBar /><BusinessList businessArray={businesses} /></>
+    <><SearchBar setBusinesses={setBusinesses} /><BusinessList businesses={businesses} /></>
 );
 }
 

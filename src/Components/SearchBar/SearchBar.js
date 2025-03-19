@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './SearchBar.module.css';
+import retrieveBusinesses from '../../utils/YelpConnection';
 
 const sortByOptions = {
     "Best Match": "best_match",
@@ -7,10 +8,10 @@ const sortByOptions = {
     "Most Reviewed": "review_count"
 };
 
-function SearchBar() {
+function SearchBar({setBusinesses}) {
   const [term, setTerm] = useState('');
   const [location, setLocation] = useState('');
-  const [sort, setSort] = useState('');
+  const [sort, setSort] = useState('best_match');
 
   const clickHandler = (event) => {
     setSort(event.target.dataset.value);
@@ -23,8 +24,10 @@ function SearchBar() {
     setLocation(target.value);
   }
 
-  const clickSearchHandler = () => {
-    console.log("Searching Yelp with Pizza, Brooklyn, best_match");
+  const clickSearchHandler = async () => {
+    const businesses = await retrieveBusinesses(location, term, sort);
+    setBusinesses(businesses);
+    console.log(businesses);
   }
 
     const renderSortByOptions = () => {
@@ -42,6 +45,8 @@ function SearchBar() {
         });
     };
 
+    const isDisabled = !term || !location;
+
     return (
         <div className={styles.SearchBar}>
         <div className={styles.SearchBarSortOptions}>
@@ -52,7 +57,7 @@ function SearchBar() {
           <input placeholder="Where?" onChange={changeLocationHandler} />
         </div>
         <div className={styles.SearchBarSubmit}>
-          <a onClick={clickSearchHandler}>Let's Go</a>
+          <a onClick={clickSearchHandler} className={isDisabled ? styles.disabled : ''} style={{ pointerEvents: isDisabled ? 'none' : 'auto' }}>Let's Go</a>
         </div>
       </div>
     );
